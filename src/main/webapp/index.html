@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+	window.onload = function() {
+		let test1View = new Vue(
+			{
+				el : "#test1",
+				data : {
+					message : "첫 번째 Vue.js 어플리케이션"
+				}
+			}		
+		)
+	}
+</script>
+</head>
+<body>
+	<div id="test1">
+		<h1>{{message}}</h1>
+	</div>
+</body>
+</html>
