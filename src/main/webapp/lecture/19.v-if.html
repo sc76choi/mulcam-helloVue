@@ -1,0 +1,161 @@
+<!-- 
+v-if
+HTML 태그 랜더링을 할 때 조건을 주고자 할 때 사용한다.
+v-if: 주어진 조건이 참일 경우 랜더링한다.
+v-else: v-if조건이 거짓일 경우 랜더링한다.
+v-else-if: v-if조건이 거짓일 경우 다른 조건을 줄 수 있다.
+
+v-show
+v-if는 조건이 거짓일 때 랜더링을 하지 않는 반면
+v-show는 일단 랜더링을 하고 css의 display 속성을 제어한다.
+
+v-if vs v-show
+v-if는 v-show에 비해 랜더링 위한 작업을 많이 해야한다.
+v-show는 화면이 나타난 이후 자주 토글될 경우 사용한다.
+v-if는 화면을 만들 때 랜더링 제어를 할 경우 사용한다.
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<style>
+</style>
+<script>
+	window.onload = function() {
+	    let vm1 = new Vue({
+	        el: '#test1',
+	        data: {
+	        	a1:100,
+	        	a2:100,
+	        	a3:100,
+	        	a4:100,
+	        	a5:100,
+	        	a6:100,
+	        	a7:100,
+	        },
+	        methods: {
+	        	setA1: function() {
+		        	if(this.a1 == 100) {
+		        		this.a1 = 200;
+		        	} else {
+		        		this.a1 = 100;
+		        	}
+	        	},
+	        	setA2: function() {
+		        	if(this.a2 == 100) {
+		        		this.a2 = 200;
+		        	} else {
+		        		this.a2 = 100;
+		        	}
+	        	},
+	        	setA3: function() {
+		        	if(this.a3 == 100) {
+		        		this.a3 = 200;
+		        	} else {
+		        		this.a3 = 100;
+		        	}
+	        	},
+	        	setA4: function() {
+		        	if(this.a4 == 100) {
+		        		this.a4 = 200;
+		        	} else {
+		        		this.a4 = 100;
+		        	}
+	        	},
+	        	setA5: function() {
+		        	if(this.a5 == 100) {
+		        		this.a5 = 200;
+		        	} else if (this.a5 == 200){
+		        		this.a5 = 300;
+		        	} else {
+		        		this.a5 = 100;
+		        	}
+	        	},
+	        	setA6: function() {
+		        	if(this.a6 == 100) {
+		        		this.a6 = 200;
+		        	} else {
+		        		this.a6 = 100;
+		        	}
+	        	},
+	        	setA7: function() {
+		        	if(this.a7 == 100) {
+		        		this.a7 = 200;
+		        	} else {
+		        		this.a7 = 100;
+		        	}
+	        	}
+	        }
+	    })
+	}
+</script>
+</head>
+<body>
+	<div id='test1'>
+	   <h3 v-if='a1 == 100'>a1은 100 입니다.</h3>
+	   <h3 v-if='a1 == 200'>a1은 200 입니다.</h3>
+	   <button type='button' @click='setA1'>a1 Setting</button>
+	   <hr/>
+	   
+	   <h3 v-if='a2 == 100'>a2은 100 입니다.</h3>
+	   <h3 v-else>a2은 100이 아닙니다.</h3>
+	   <button type='button' @click='setA2'>a2 Setting</button>
+	   <hr/>
+	   
+	   <div v-if='a3 == 100'>
+	       <h3>a3는 100입니다.</h3>
+	       <h3>a3는 100입니다.</h3>
+	       <h3>a3는 100입니다.</h3>
+	   </div>
+	   <div v-else>
+	       <h3>a3은 100이 아닙니다.</h3>
+	       <h3>a3은 100이 아닙니다.</h3>
+	       <h3>a3은 100이 아닙니다.</h3>
+	   </div>
+	   <button type='button' @click='setA3'>a3 Setting</button>
+	   <hr/>
+	   
+	   <template v-if='a4 == 100'>
+	       <h3>a4는 100입니다.</h3>
+	       <h3>a4는 100입니다.</h3>
+	       <h3>a4는 100입니다.</h3>
+	   </template>
+	   <template v-else>
+	       <h3>a4는 100이 아닙니다.</h3>
+	       <h3>a4는 100이 아닙니다.</h3>
+	       <h3>a4는 100이 아닙니다.</h3>
+	   </template>
+	   <button type='button' @click='setA4'>a4 Setting</button>
+	   <hr/>
+	   
+	   <template v-if='a5 == 100'>
+           <h3>a5는 100입니다.</h3>
+       </template>
+       <template v-else-if='a5 == 200'>
+           <h3>a5는 200입니다.</h3>
+       </template>
+       <template v-else-if='a5 == 300'>
+           <h3>a5는 300입니다.</h3>
+       </template>
+	   <button type='button' @click='setA5'>a5 Setting</button>
+	   <hr/>
+	   
+	   <template v-if='a6 == 100'>
+	       <h3>data1</h3>
+           <input type='text' key='data1'>
+       </template>
+	   <template v-else>
+	       <h3>data2</h3>
+           <input type='text' key='data2'>
+       </template>
+       <button type='button' @click='setA6'>a6 Setting</button>
+	   <hr/>
+	   
+	   <h3 v-show='a7 == 100'>a7은 100입니다.</h3>
+	   <h3 v-show='a7 != 100'>a7은 100이 아닙니다.</h3>
+       <button type='button' @click='setA7'>a7 Setting</button>
+	</div>
+</body>
+</html>
