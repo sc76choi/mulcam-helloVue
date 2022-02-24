@@ -1,0 +1,85 @@
+<!-- 
+VueJS를 통해 HTML을 랜더링할 때 개발자가 자유롭게 작업할 수 있도록 제공되는 개념이다.
+Component를 만들 때 다양한 처리를 할 수 있다.
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<style>
+</style>
+<script>
+
+	Vue.component('com1', {
+		template: '<h1>hello world</h1>'
+	})
+	
+	Vue.component('com2', {
+		template: '<h1><slot></slot></h1>'
+	})
+	
+	Vue.component('com3', {
+		render: function(createElement) {
+			//let msg = 'hello world';
+			let msg = this.$slots.default[0].text;
+			
+			let tagName = this.tagname;
+			let idValue = this.id;
+			let colorValue = this.color;
+			let bgcolorValue = this.bgcolor;
+			let h1_tag = createElement(tagName, {
+				attrs: {
+					id: idValue
+					
+				},
+				style: {
+					color: colorValue,
+					backgroundColor: bgcolorValue
+				}
+			}, msg);
+			return h1_tag;
+		},
+		props: {
+			tagname: {
+				attributes:String,
+				required: true
+			},
+			id: {
+				attributes:String,
+				required: true
+			},
+			color: {
+				attributes:String
+			},
+			bgcolor: {
+				attributes:String
+			}
+	
+		}
+	})
+	window.onload = function() {
+		let vm1 = new Vue({
+			el: '#test1'
+			
+		})
+	}
+</script>
+</head>
+<body>
+	<div id='test1'>
+		<com1>Apple</com1>
+		<com1>Google</com1>
+		<com1>MS</com1>
+		<hr/>
+		<com2>Apple</com2>
+		<com2>Google</com2>
+		<com2>MS</com2>
+		<hr/>
+		<com3 :tagname="'h1'" :id="'a1'" :color="'red'" :bgcolor="'blue'">Apple</com3>
+		<com3 :tagname="'h2'" :id="'a2'" :color="'white'" :bgcolor="'black'">Google</com3>
+		<com3 :tagname="'h3'" :id="'a3'">MS</com3>
+	</div>
+</body>
+</html>
