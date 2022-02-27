@@ -1,0 +1,41 @@
+<!-- 
+VueJS에서 Ajax통신을 하기 위해서는 라이브러리를 이용해야 하다.
+다양한 라이브러리가 있지만 가장 많이 사용하는 axios{엑시어스} 라이브러리를 사용한다.
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<style>
+</style>
+<script>
+	window.onload = function() {
+		let vm1 = new Vue({
+			el:'#test1',
+			data: {
+				data1: '',
+				data2: ''
+			},
+			methods: {
+				getData: function() {
+					axios.get('../resources/data.json').then(function(response){
+						vm1.data1 = response.data.data1;
+						vm1.data2 = response.data.data2;
+					})
+				}
+			}
+		})
+	}
+</script>
+</head>
+<body>
+	<div id='test1'>
+		<h3>data1 : {{data1}}</h3>
+		<h3>data2 : {{data2}}</h3>
+		<button type='button' @click='getData'>data가져오기</button>
+	</div>
+</body>
+</html>
